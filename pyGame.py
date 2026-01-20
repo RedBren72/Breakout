@@ -32,14 +32,10 @@ dirSTOP = 0
 scrAREA = scrWIDTH, scrHEIGHT = 640, 480
 scrSIZE = 20
 
-print(type(scrAREA))
-
 gameDisplay = pygame.display
 gameScreen = gameDisplay.set_mode( scrAREA )
 
 gameDisplay.set_caption( "Thru' The Wall" )
-
-print( type( gameScreen ) )
 
 gameSpeed = 120
 gameExit = False
@@ -61,26 +57,19 @@ while not gameExit:
         # Get keypresses
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
-                print( "Key "+str(event.key)+" Detected" )
                 if event.key == pygame.K_q:
-                    print( "Quit Key Pressed" )
                     gameRunning = False
                 if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:
-                    print( "Speed Key Pressed" )
                     batSpeed = scrSIZE // 2                   
                 if event.key == pygame.K_z:
-                    print( "Left Key Pressed" )
                     batdirX = dirLEFT
                 if event.key == pygame.K_x:
-                    print( "Right Key Pressed" )
                     batdirX = dirRIGHT
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:
-                    print( "Speed Key Released" )
                     batSpeed = scrSIZE // 4
                 if event.key == pygame.K_z or event.key == pygame.K_x:
-                    print( "Movement Key Released" )
                     batdirX = dirSTOP
 
             if event.type == pygame.QUIT:
@@ -113,7 +102,6 @@ while not gameExit:
 
         # Missed ball detection
         if ballPosY > scrHEIGHT-scrSIZE*2:
-            print( "Missed Ball!" )
             ballPosX, ballPosY = scrWIDTH // 2, scrHEIGHT // 2
             ballDirX = dirSTOP
             ballDirY = dirDOWN
