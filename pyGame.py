@@ -11,13 +11,20 @@ pygame.init()
 # ZX Spectrum screen is 32 columns x 24 rows (approx)
 
 # Colour Definitions
-rgbBLACK = (0, 0, 0)
 rgbRED = (200, 0, 0)
 rgbGREEN = (0, 200, 0)
 rgbBLUE = (0, 0, 200)
 rgbYELLOW = (200, 200, 0)
 rgbCYAN = (0, 200, 200)
 rgbMAGENTA = (200, 0, 200)
+rgbBLACK = (0, 0, 0)
+rgbGREY032 = (32, 32, 32)
+rgbGREY064 = (64, 64, 64)
+rgbGREY096 = (96, 96, 96)
+rgbGREY128 = (128, 128, 128)
+rgbGREY160 = (160, 160, 160)
+rgbGREY192 = (192, 192, 192)
+rgbGREY224 = (224, 224, 224)
 rgbWHITE = (255, 255, 255)
 
 # Direction Definitions
@@ -28,15 +35,10 @@ dirDOWN = 1
 dirSTOP = 0
 
 # Screen dimensions
-
 scrAREA = scrWIDTH, scrHEIGHT = 640, 480
 scrSIZE = 20
 
-gameDisplay = pygame.display
-gameScreen = gameDisplay.set_mode( scrAREA )
-
-gameDisplay.set_caption( "Thru' The Wall" )
-
+# Initialise Game Variables
 gameSpeed = 120
 gameExit = False
 keyPressed = False
@@ -48,10 +50,108 @@ batSpeed = 4
 ballPos = ballPosX, ballPosY = scrWIDTH // 2, scrHEIGHT // 2
 ballDir = ballDirX, ballDirY = dirSTOP, dirDOWN
 
-# Outer loop
+# Set up display
+gameDisplay = pygame.display
+gameDisplay.set_caption( "Thru' The Wall" )
+gameScreen = gameDisplay.set_mode( scrAREA )
+
+# Function to show intro screen
+def showIntro():
+
+    font = pygame.font.SysFont(None, 55)
+    titleText = font.render("Thru' The Wall", True, rgbWHITE)
+    directionText = font.render("Z for Left - X for Right SHIFT for Speed", True, rgbWHITE)
+    instructionText = font.render("Press SPACE to Start", True, rgbWHITE)
+
+    # Flashing screen
+    gameScreen.fill( rgbGREEN )
+    pygame.display.update()
+    pygame.time.delay( 50 )    
+    gameScreen.fill( rgbCYAN )
+    pygame.display.update()
+    pygame.time.delay( 50 )    
+    gameScreen.fill( rgbBLUE )
+    pygame.display.update()
+    pygame.time.delay( 50 )    
+    gameScreen.fill( rgbMAGENTA )
+    pygame.display.update()
+    pygame.time.delay( 50 )    
+    gameScreen.fill( rgbRED )
+    pygame.display.update()
+    pygame.time.delay( 50 )    
+    gameScreen.fill( rgbYELLOW )
+    pygame.display.update()
+    pygame.time.delay( 50 )    
+    gameScreen.fill( rgbWHITE )
+    pygame.display.update()
+    pygame.time.delay( 50 )    
+    gameScreen.fill( rgbGREY224 )
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    pygame.display.update()
+    pygame.time.delay( 50 )
+    gameScreen.fill( rgbGREY192 )
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    pygame.display.update()
+    pygame.time.delay( 50 )
+    gameScreen.fill( rgbGREY192 )
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    pygame.display.update()
+    pygame.time.delay( 50 )
+    gameScreen.fill( rgbGREY160 )
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    pygame.display.update()
+    pygame.time.delay( 50 )
+    gameScreen.fill( rgbGREY128 )
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    pygame.display.update()
+    pygame.time.delay( 50 )
+    gameScreen.fill( rgbGREY096 )
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    pygame.display.update()
+    pygame.time.delay( 50 )
+    gameScreen.fill( rgbGREY064 )
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    pygame.display.update()
+    pygame.time.delay( 50 )
+    gameScreen.fill( rgbGREY032 )
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    pygame.display.update()
+    pygame.time.delay( 50 )
+    gameScreen.fill( rgbBLACK )
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    gameScreen.blit(directionText, (scrWIDTH // 2 - directionText.get_width() // 2, scrHEIGHT // 2))
+    gameScreen.blit(instructionText, (scrWIDTH // 2 - instructionText.get_width() // 2, scrHEIGHT // 2))
+    pygame.display.update()
+
+    font = pygame.font.SysFont(None, 55)
+    titleText = font.render("Thru' The Wall", True, rgbWHITE)
+    instructionText = font.render("Press SPACE to Start", True, rgbWHITE)
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    pygame.display.update()
+
+# Main game loop
 while not gameExit:
     gameClock = pygame.time.Clock()
     gameRunning = True
+
+    showIntro()
+
+    # Start loop
+    menu = True
+    while menu:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    pygame.quit()
+                    sys.exit()
+                if event.key == pygame.K_SPACE:
+                    menu = False
+                    
+
+    # Game loop
     while gameRunning:
 
         # Get keypresses
@@ -107,9 +207,9 @@ while not gameExit:
             ballDirY = dirDOWN
 
         # Draw everything
-        gameScreen.fill( rgbBLACK )
-        pygame.draw.circle( gameScreen, rgbWHITE, (ballPosX, ballPosY), scrSIZE // 2 )
-        pygame.draw.rect( gameScreen, rgbWHITE, (batPosX, scrHEIGHT - scrSIZE*2, scrSIZE*4, scrSIZE) )
+        gameScreen.fill( rgbCYAN )
+        pygame.draw.circle( gameScreen, rgbBLACK, (ballPosX, ballPosY), scrSIZE // 2 )
+        pygame.draw.rect( gameScreen, rgbBLACK, (batPosX, scrHEIGHT - scrSIZE*2, scrSIZE*4, scrSIZE) )
         pygame.display.update()
         
         
