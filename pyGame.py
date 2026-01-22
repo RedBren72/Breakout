@@ -5,8 +5,6 @@ import pygame
 import random
 import sys
 
-pygame.init()
-
 # Constants for the original game's screen/grid size
 # ZX Spectrum screen is 32 columns x 24 rows (approx)
 
@@ -51,6 +49,7 @@ ballPos = ballPosX, ballPosY = scrWIDTH // 2, scrHEIGHT // 2
 ballDir = ballDirX, ballDirY = dirSTOP, dirDOWN
 
 # Set up display
+pygame.init()
 gameDisplay = pygame.display
 gameDisplay.set_caption( "Thru' The Wall" )
 gameScreen = gameDisplay.set_mode( scrAREA )
@@ -129,6 +128,22 @@ def showIntro():
     gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
     pygame.display.update()
 
+# Function to create walls
+def createWalls():
+    # The wall is an array of bricks
+    # Bricks are rectangles size scrSIZE x 2 by scrSIZE
+    # Half-Bricks are rectangles size scrSIZE by scrSIZE
+    wall = []
+    for row in range(5):
+        wallRow = []
+        for col in range(scrWIDTH // scrSIZE):
+            if random.choice( [True, False] ):
+                wallRow.append( pygame.Rect(col * scrSIZE, row * scrSIZE * 2, scrSIZE, scrSIZE * 2) )
+            else:
+                wallRow.append( pygame.Rect(col * scrSIZE, row * scrSIZE * 2, scrSIZE, scrSIZE) )
+                wallRow.append( pygame.Rect(col * scrSIZE, row * scrSIZE * 2 + scrSIZE, scrSIZE, scrSIZE) )
+        wall.append(wallRow)
+
 # Main game loop
 while not gameExit:
     gameClock = pygame.time.Clock()
@@ -136,7 +151,7 @@ while not gameExit:
 
     showIntro()
 
-    # Start loop
+    # Menu loop
     menu = True
     while menu:
         for event in pygame.event.get():
