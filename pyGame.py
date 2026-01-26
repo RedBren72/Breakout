@@ -65,89 +65,104 @@ def showIntro():
     # Flashing screen
     gameScreen.fill( rgbGREEN )
     pygame.display.update()
-    pygame.time.delay( 50 )    
+    pygame.time.delay( 200 )    
     gameScreen.fill( rgbCYAN )
     pygame.display.update()
-    pygame.time.delay( 50 )    
+    pygame.time.delay( 200 )    
     gameScreen.fill( rgbBLUE )
     pygame.display.update()
-    pygame.time.delay( 50 )    
+    pygame.time.delay( 200 )    
     gameScreen.fill( rgbMAGENTA )
     pygame.display.update()
-    pygame.time.delay( 50 )    
+    pygame.time.delay( 200 )    
     gameScreen.fill( rgbRED )
     pygame.display.update()
-    pygame.time.delay( 50 )    
+    pygame.time.delay( 200 )    
     gameScreen.fill( rgbYELLOW )
     pygame.display.update()
-    pygame.time.delay( 50 )    
+    pygame.time.delay( 200 )    
     gameScreen.fill( rgbWHITE )
     pygame.display.update()
-    pygame.time.delay( 50 )    
+    pygame.time.delay( 100 )    
     gameScreen.fill( rgbGREY224 )
-    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 4))
     pygame.display.update()
-    pygame.time.delay( 50 )
+    pygame.time.delay( 100 )
     gameScreen.fill( rgbGREY192 )
-    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 4))
     pygame.display.update()
-    pygame.time.delay( 50 )
+    pygame.time.delay( 100 )
     gameScreen.fill( rgbGREY192 )
-    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 4))
     pygame.display.update()
-    pygame.time.delay( 50 )
+    pygame.time.delay( 100 )
     gameScreen.fill( rgbGREY160 )
-    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 4))
     pygame.display.update()
-    pygame.time.delay( 50 )
+    pygame.time.delay( 100 )
     gameScreen.fill( rgbGREY128 )
-    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 4))
     pygame.display.update()
-    pygame.time.delay( 50 )
+    pygame.time.delay( 100 )
     gameScreen.fill( rgbGREY096 )
-    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 4))
     pygame.display.update()
-    pygame.time.delay( 50 )
+    pygame.time.delay( 100 )
     gameScreen.fill( rgbGREY064 )
-    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 4))
     pygame.display.update()
-    pygame.time.delay( 50 )
+    pygame.time.delay( 100 )
     gameScreen.fill( rgbGREY032 )
-    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 4))
     pygame.display.update()
-    pygame.time.delay( 50 )
+    pygame.time.delay( 100   )
     gameScreen.fill( rgbBLACK )
-    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
+    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 4))
     gameScreen.blit(directionText, (scrWIDTH // 2 - directionText.get_width() // 2, scrHEIGHT // 2))
-    gameScreen.blit(instructionText, (scrWIDTH // 2 - instructionText.get_width() // 2, scrHEIGHT // 2))
+    gameScreen.blit(instructionText, (scrWIDTH // 2 - instructionText.get_width() // 2, scrHEIGHT * 3 // 4))
     pygame.display.update()
+    pygame.time.delay( 500 )
+    
 
-    font = pygame.font.SysFont(None, 55)
-    titleText = font.render("Thru' The Wall", True, rgbWHITE)
-    instructionText = font.render("Press SPACE to Start", True, rgbWHITE)
-    gameScreen.blit(titleText, (scrWIDTH // 2 - titleText.get_width() // 2, scrHEIGHT // 3))
-    pygame.display.update()
 
 # Function to create walls
 def createWalls():
     # The wall is an array of bricks
-    # Bricks are rectangles size scrSIZE x 2 by scrSIZE
-    # Half-Bricks are rectangles size scrSIZE by scrSIZE
+    # Bricks are rectangles with width = size scrSIZE x 2 and height = scrSIZE
+    # Half-Bricks are rectangles with width = scrSIZE and height = scrSIZE
+    # There are 5 rows of bricks
+    # Each row is a different colour but all bricks have a black border
+    # The wall is as wide as the screen
+    # The odd rows have full bricks only
+    # The even rows start and end with half-bricks
+    # Brick positions are stored in a 2D array
     wall = []
+    brickColours = [ rgbRED, rgbGREEN, rgbBLUE, rgbYELLOW, rgbMAGENTA ]
     for row in range(5):
-        wallRow = []
-        for col in range(scrWIDTH // scrSIZE):
-            if random.choice( [True, False] ):
-                wallRow.append( pygame.Rect(col * scrSIZE, row * scrSIZE * 2, scrSIZE, scrSIZE * 2) )
-            else:
-                wallRow.append( pygame.Rect(col * scrSIZE, row * scrSIZE * 2, scrSIZE, scrSIZE) )
-                wallRow.append( pygame.Rect(col * scrSIZE, row * scrSIZE * 2 + scrSIZE, scrSIZE, scrSIZE) )
-        wall.append(wallRow)
+        brickRow = []
+        yPos = row * scrSIZE
+        if row % 2 == 0:
+            # Odd row - full bricks only
+            for col in range(scrWIDTH // (scrSIZE * 2)):
+                xPos = col * scrSIZE * 2
+                brickRect = pygame.Rect(xPos, yPos, scrSIZE * 2, scrSIZE)
+                brickRow.append( (brickRect, brickColours[row]) )
+        else:
+            # Even row - half-bricks at start and end
+            halfBrickRectStart = pygame.Rect(0, yPos, scrSIZE, scrSIZE)
+            brickRow.append( (halfBrickRectStart, brickColours[row]) )
+            for col in range(1, (scrWIDTH // (scrSIZE * 2))):
+                xPos = col * scrSIZE * 2 - scrSIZE
+                brickRect = pygame.Rect(xPos, yPos, scrSIZE * 2, scrSIZE)
+                brickRow.append( (brickRect, brickColours[row]) )
+            halfBrickRectEnd = pygame.Rect(scrWIDTH - scrSIZE, yPos, scrSIZE, scrSIZE)
+            brickRow.append( (halfBrickRectEnd, brickColours[row]) )
+        wall.append(brickRow)
+    
 
 # Main game loop
 while not gameExit:
     gameClock = pygame.time.Clock()
-    gameRunning = True
 
     showIntro()
 
@@ -163,6 +178,7 @@ while not gameExit:
                     pygame.quit()
                     sys.exit()
                 if event.key == pygame.K_SPACE:
+                    gameRunning = True
                     menu = False
                     
 
