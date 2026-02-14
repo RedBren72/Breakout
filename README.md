@@ -7,8 +7,8 @@
 - [x]   Moving ball
 - [x]   Bricks
 - [x]   Putting it together
-- [X]   Refine score calculation
-- [ ]   Modularise the code
+- [x]   Refine score calculation
+- [x]   Modularise the code
 - [ ]   Refine collision detection for sides of bricks
 - [ ]   Refine collision detection for corners of bat
 - [ ]   Refine game logic when wall is demolished
