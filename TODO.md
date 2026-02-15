@@ -8,7 +8,7 @@
 - [x]   Putting it together
 - [x]   Refine score calculation
 - [x]   Modularise the code
-- [ ]   Refine collision detection for sides of bricks
+- [x]   Refine collision detection for sides of bricks
 - [ ]   Refine collision detection for corners of bat
 - [ ]   Refine game logic when wall is demolished
 - [ ]   Introduce game logic for player lives (3 lives, Extra life on demolishing walls)
